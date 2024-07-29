@@ -1,0 +1,21 @@
+#include <SoftwareSerial.h>
+
+// Khởi tạo UART trên Arduino Uno
+SoftwareSerial mySerial(10, 11); // RX, TX
+
+void setup() {
+  Serial.begin(9600);       // Serial monitor
+  mySerial.begin(9600);     // Khởi tạo UART với STM32F4
+  Serial.println("Arduino Uno ready");
+}
+
+void loop() {
+  sendString("Hello from Arduino Uno!\r\n");
+  delay(1000);
+}
+
+void sendString(const char* str) {
+  while (*str) {
+    mySerial.write(*str++);
+  }
+}
